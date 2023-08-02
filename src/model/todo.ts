@@ -4,9 +4,10 @@ type Todo = {
   title: string;
   description: string;
   status: TodoStatus;
-  createdAt: string;
+  createdDate: string;
   startDate: string;
   targetDate: string;
+  completedDate: string;
   alarm: boolean;
 };
 
