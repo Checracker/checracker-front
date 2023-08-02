@@ -42,3 +42,7 @@ npm run start
 ├── models
 └── utils
 ```
+
+## 이슈 관리
+
+- [Jira](https://metacognition.atlassian.net/jira/software/c/projects/CHEC/boards/6/backlog?atlOrigin=eyJpIjoiYWNhOTc5YzgyMzFlNDg0MmIyMmFhMzIwNzNlMjk1NzEiLCJwIjoiaiJ9)
