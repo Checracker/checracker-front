@@ -20,3 +20,25 @@ npm install
 npm run build
 npm run start
 ```
+
+## 기술 스택
+
+- Next.js
+- Typescript
+- mui, emotion
+
+## 폴더 구조
+
+```
+.
+├── components
+│   └── ui // 공통 ui
+├── app // app > page.tsx : / 경로
+│   ├── board/[boardId]/page.tsx : /board/[boardId] 경로
+├── hooks
+├── constants // 상수
+├── public
+├── styles
+├── models
+└── utils
+```
