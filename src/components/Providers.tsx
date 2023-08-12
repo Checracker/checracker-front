@@ -1,8 +1,10 @@
 "use client";
 
+import ThemeRegistry from "./ThemeRegistry";
+
 type Props = {
   children: React.ReactNode;
 };
 export default function Providers({ children }: Props) {
-  return <>{children}</>;
+  return <ThemeRegistry>{children}</ThemeRegistry>;
 }
