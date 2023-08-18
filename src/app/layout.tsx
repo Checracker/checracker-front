@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import Providers from "@/components/Providers";
@@ -15,12 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen ">
-        <Header />
+      <body className="min-h-screen">
         <main>
           <Providers>{children}</Providers>
         </main>
-        <footer>footer</footer>
       </body>
     </html>
   );
