@@ -2,17 +2,11 @@ import Image from "next/image";
 import styles from "./LoginPage.module.css";
 import classNames from "classnames";
 
-/**
-체크래커 로그인 화면 UI 그리기
-로그인화면 반응형 UI
-로그인 폼 검증
-Next auth 붙이기
- */
 export default function LoginPage() {
   return (
     <div className="flex">
       <div className="w-0 h-screen bg-cover md:w-3/5 bg-checked-pattern"></div>
-      <section className="flex items-center justify-center w-full h-screen md:w-2/5">
+      <section className="flex items-center justify-center w-full h-screen p-5 md:w-2/5">
         <div className={`flex flex-col items-center ${styles.app}`}>
           <Image
             src="/images/cracker.png"
