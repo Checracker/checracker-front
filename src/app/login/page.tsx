@@ -34,19 +34,22 @@ export default function LoginPage() {
               styles.border,
             )}
           >
+            {/* TODO: 로그인 로고 적용 => CHEC-49 */}
             구글로그인
           </button>
           <button
-            className={classNames(styles.button, "mt-[11px] bg-[#FFD910]")}
+            className={classNames(styles.button, `mt-[11px] bg-[#FEE500]`)}
           >
+            {/* TODO: 로그인 로고 적용 => CHEC-49 */}
             카카오 로그인
           </button>
           <button
             className={classNames(
               styles.button,
-              "mt-[11px] bg-[#4BBD2E] text-white",
+              `mt-[11px] bg-[#03C75A] text-white`,
             )}
           >
+            {/* TODO: 로그인 로고 적용 => CHEC-49 */}
             네이버 로그인
           </button>
         </div>
