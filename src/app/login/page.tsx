@@ -1,6 +1,8 @@
 import Image from "next/image";
 import styles from "./LoginPage.module.css";
 import classNames from "classnames";
+import loginStyles from "src/components/login/Login.module.css";
+import EmailLogin from "@/components/login/EmailLogin";
 
 export default function LoginPage() {
   return (
@@ -15,38 +17,30 @@ export default function LoginPage() {
             height={164}
           />
           <h1 className={styles.title}>Checracker</h1>
-          <input
-            className={styles.input}
-            placeholder="이메일주소를 입력해주세요"
-          />
+          <EmailLogin />
           <button
             className={classNames(
-              styles.button,
-              "mt-4 bg-[#DE1A1A] text-[#ffffff]",
-            )}
-          >
-            시작하기
-          </button>
-          <button
-            className={classNames(
-              styles.button,
+              loginStyles.button,
               "mt-[55px] bg-[#ffffff] text-[#000000]",
               styles.border,
             )}
           >
+            {/* TODO: 로그인 로고 적용 => CHEC-49 */}
             구글로그인
           </button>
           <button
-            className={classNames(styles.button, "mt-[11px] bg-[#FFD910]")}
+            className={classNames(loginStyles.button, `mt-[11px] bg-[#FEE500]`)}
           >
+            {/* TODO: 로그인 로고 적용 => CHEC-49 */}
             카카오 로그인
           </button>
           <button
             className={classNames(
-              styles.button,
-              "mt-[11px] bg-[#4BBD2E] text-white",
+              loginStyles.button,
+              `mt-[11px] bg-[#03C75A] text-white`,
             )}
           >
+            {/* TODO: 로그인 로고 적용 => CHEC-49 */}
             네이버 로그인
           </button>
         </div>
