@@ -3,6 +3,8 @@
 import { store } from "@/provider/store";
 import { Provider } from "react-redux";
 import ThemeRegistry from "./ThemeRegistry";
+import { ThemeProvider } from "@emotion/react";
+import { theme } from "@/styles/emotionTheme";
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +12,9 @@ type Props = {
 export default function Providers({ children }: Props) {
   return (
     <Provider store={store}>
-      <ThemeRegistry>{children}</ThemeRegistry>
+      <ThemeProvider theme={theme}>
+        <ThemeRegistry>{children}</ThemeRegistry>
+      </ThemeProvider>
     </Provider>
   );
 }
