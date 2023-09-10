@@ -1,5 +1,6 @@
 "use client";
 
+import DateButton from "@/components/ui/DateButton";
 import FroalaEditor from "@/components/ui/FroalaEditor/FroalaEditor";
 import { theme } from "@/styles/emotionTheme";
 import styled from "@emotion/styled";
@@ -37,7 +38,7 @@ export default function DetailBoard() {
               중요x 긴급os
             </Header>
             <Hr boardNumber={tempBoardNumber}></Hr>
-            <div>
+            <HeaderBar>
               <FormGroup>
                 <FormControlLabel
                   control={
@@ -50,13 +51,16 @@ export default function DetailBoard() {
                       <Title>최종 목표에 대한 내용</Title>
                     </LabelBox>
                   }
-                />{" "}
-                <div>목표에 대한 내용을 메모해보세요 // floaraEditor</div>
+                />
               </FormGroup>
-            </div>
+              <ButtonBox>
+                <DateButton />
+                <DateButton />
+                <DateButton />
+              </ButtonBox>
+            </HeaderBar>
             <FroalaEditor />
           </TopContainer>
-
           <TodoList>
             <FormGroup>
               todolist
@@ -221,3 +225,15 @@ const BottomContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
 `;
+
+const HeaderBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap:8px;
+`
