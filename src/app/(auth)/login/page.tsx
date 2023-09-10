@@ -1,8 +1,8 @@
 import Image from "next/image";
-import styles from "./LoginPage.module.css";
+import styles from "../LoginPage.module.css";
 import classNames from "classnames";
-import loginStyles from "src/components/login/Login.module.css";
-import EmailLogin from "@/components/login/EmailLogin";
+import loginStyles from "src/components/auth/Login.module.css";
+import EmailLogin from "@/components/auth/EmailLogin";
 
 export default function LoginPage() {
   return (
@@ -16,7 +16,7 @@ export default function LoginPage() {
             width={164}
             height={164}
           />
-          <h1 className={styles.title}>Checracker</h1>
+          <h1 className={`${styles.title} mb-[11px]`}>Checracker</h1>
           <EmailLogin />
           <button
             className={classNames(
