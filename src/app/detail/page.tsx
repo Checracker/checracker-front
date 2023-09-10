@@ -21,7 +21,7 @@ export default function DetailBoard() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  let tempBoardNumber = 3;
+  const tempBoardNumber = 3;
   const label = {
     inputProps: { "aria-label": `${tempBoardNumber}사분면목표 A` },
   };
@@ -40,7 +40,11 @@ export default function DetailBoard() {
             <div>
               <FormGroup>
                 <FormControlLabel
-                  control={<Radio style={{ width: 48, height: 48, marginRight:"8px" }} />}
+                  control={
+                    <Radio
+                      style={{ width: 48, height: 48, marginRight: "8px" }}
+                    />
+                  }
                   label={
                     <LabelBox>
                       <Title>최종 목표에 대한 내용</Title>

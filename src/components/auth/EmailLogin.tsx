@@ -3,14 +3,11 @@
 import classNames from "classnames";
 import styles from "./Login.module.css";
 import { useForm } from "react-hook-form";
-import ErrorText from "../ui/ErrorText";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-type LoginFormData = {
-  email: string;
-  password: string;
-};
+import { signedInUsers } from "@/data/dummy";
+import { LoginFormData } from "@/types/auth";
+import LoginInput from "../ui/LoginInput";
 
 /**
  * 이메일 로그인
@@ -26,38 +23,50 @@ export default function EmailLogin() {
     register,
     formState: { errors },
   } = useForm<LoginFormData>();
-  const [submittedEmail, setSubmittedEmail] = useState<string>("");
+  const [showPasswordInput, setShowPasswordInput] = useState<boolean>(false);
 
-  const checkLogin = () => {
+  const handleSuccessLogin = () => {
     // TODO 앱 경로 상수로 만들기 => CHEC-53
     router.replace("/board");
   };
 
+  const checkLogin = (formData: LoginFormData) => {
+    // 로그인 아이디 입력
+    const user = signedInUsers.find((user) => user.email === formData.email);
+    if (user) {
+      // 가입된 이메일이 있는 경우
+      setShowPasswordInput(true);
+    } else {
+      // 이메일 형식은 맞지만 가입된 이메일이 없는 경우
+      router.push(`/signup?email=${formData.email}`);
+    }
+    if (formData.password && formData.password === user?.password) {
+      handleSuccessLogin();
+    }
+  };
+
   return (
     <form
-      className="w-full"
-      onSubmit={handleSubmit((data) => {
-        setSubmittedEmail(data.email);
-
+      className="flex flex-col w-full gap-4"
+      onSubmit={handleSubmit((formData) => {
         // TODO 로그인 로직 app/api 이용해서 임시 구현하기 => CHEC-54
-        data.password && checkLogin();
+        checkLogin(formData);
       })}
     >
-      <input
-        {...register("email", {
+      <LoginInput
+        register={register("email", {
           required: "이메일 주소를 입력해주세요",
           pattern: {
             value: /\S+@\S+\.\S+/,
             message: "형식에 맞지 않는 이메일입니다",
           },
         })}
-        className={styles.input}
         placeholder="이메일주소를 입력해주세요"
+        errorMessage={errors.email?.message}
       />
-      {errors.email && <ErrorText error={`${errors.email.message ?? ""}`} />}
-      {submittedEmail && (
-        <input
-          {...register("password", {
+      {showPasswordInput && (
+        <LoginInput
+          register={register("password", {
             required: "비밀번호를 입력해주세요",
             minLength: {
               value: 8,
@@ -69,20 +78,13 @@ export default function EmailLogin() {
               value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
             },
           })}
-          type="password"
-          className={styles.input}
-          placeholder="비밀번호를 입력해주세요"
+          placeholder="비밀번호를 입력해 주세요"
+          errorMessage={errors.password?.message}
         />
-      )}
-      {errors.password && (
-        <ErrorText error={`${errors.password.message ?? ""}`} />
       )}
       <button
         type="submit"
-        className={classNames(
-          styles.button,
-          "mt-4 bg-[#DE1A1A] text-[#ffffff]",
-        )}
+        className={classNames(styles.button, "bg-[#DE1A1A] text-[#ffffff]")}
       >
         시작하기
       </button>

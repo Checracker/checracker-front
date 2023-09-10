@@ -1,7 +1,6 @@
 "use client";
-import Image from "next/image";
+
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import dynamic from "next/dynamic";
 import "froala-editor/css/froala_style.min.css";
 import "froala-editor/js/plugins.pkgd.min.js";
@@ -21,7 +20,7 @@ const MyFroalaEditor = dynamic(
 );
 
 export default function FroalaEditor() {
-  let [count, setCount] = useState([0, 0, 0]);
+  //  let [count, setCount] = useState([0, 0, 0]);
   const [msg, setMsg] = useState("");
 
   const onChangeHandler = () => {};

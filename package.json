@@ -14,13 +14,16 @@
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.4",
+    "@mui/x-date-pickers": "^6.13.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
     "classnames": "^2.3.2",
+    "dayjs": "^1.11.9",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "froala-editor": "^4.1.1",
@@ -36,6 +39,9 @@
   },
   "devDependencies": {
     "@types/jquery": "^3.5.18",
+    "@next/eslint-plugin-next": "^13.4.19",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
     "husky": "^8.0.3"
   }
 }
