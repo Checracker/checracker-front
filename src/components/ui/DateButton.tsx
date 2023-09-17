@@ -57,6 +57,7 @@ function ButtonDatePicker(
   return (
     <DatePicker
       slots={{ field: ButtonField, ...props.slots }}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       slotProps={{ field: { setOpen } as any }}
       {...props}
       open={open}

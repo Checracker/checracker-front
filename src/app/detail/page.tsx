@@ -2,7 +2,6 @@
 
 import DateButton from "@/components/ui/DateButton";
 import FroalaEditor from "@/components/ui/FroalaEditor/FroalaEditor";
-import { theme } from "@/styles/emotionTheme";
 import styled from "@emotion/styled";
 import {
   Button,
@@ -235,5 +234,5 @@ const HeaderBar = styled.div`
 const ButtonBox = styled.div`
   display: flex;
   align-items: center;
-  gap:8px;
-`
+  gap: 8px;
+`;
