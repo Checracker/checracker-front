@@ -75,7 +75,7 @@ export default function DateButton() {
       <Stack spacing={1}>
         <ButtonDatePicker
           label={`Current date: ${
-            value == null ? "null" : value.format("MM/DD/YYYY")
+            value === null ? "값을 입력해주세요" : value.format("MM/DD/YYYY")
           }`}
           value={value}
           onChange={(newValue) => setValue(newValue)}

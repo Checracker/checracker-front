@@ -11,7 +11,9 @@ const MyFroalaEditor = dynamic(
     const values = await Promise.all([
       import("react-froala-wysiwyg"), // must be first import since we are doing values[0] in return
     ]);
-    return values[0];
+
+    const editor = values[0];
+    return editor;
   },
   {
     loading: () => <p>LOADING!!!</p>,
@@ -21,7 +23,7 @@ const MyFroalaEditor = dynamic(
 
 export default function FroalaEditor() {
   //  let [count, setCount] = useState([0, 0, 0]);
-  const [msg, setMsg] = useState("");
+  const [msg] = useState("");
 
   const onChangeHandler = () => {};
 
