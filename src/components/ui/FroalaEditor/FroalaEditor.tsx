@@ -12,7 +12,7 @@ const MyFroalaEditor = dynamic(
       import("react-froala-wysiwyg"), // must be first import since we are doing values[0] in return
     ]);
 
-    const editor = values[0];
+    const [editor] = values;
     return editor;
   },
   {
