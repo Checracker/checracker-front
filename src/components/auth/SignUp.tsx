@@ -10,6 +10,7 @@ import SimpleSelect from "../ui/SimpleSelect";
 import { useMemo, useState } from "react";
 import ErrorText from "../ui/ErrorText";
 import { SelectChangeEvent } from "@mui/material";
+import { appRoutes } from "@/constants/appRoutes";
 
 type SignUpFormData = LoginFormData &
   BirthDate & {
@@ -35,15 +36,14 @@ export default function SignUp() {
 
   const [selectedMonth, setSelectedMonth] = useState<number>(0);
 
-  const handleSuccessSignUp = () => {
-    // TODO 앱 경로 상수로 만들기 => CHEC-53
-    router.replace("/board");
+  const handleSuccessSignUp = (email: string) => {
+    router.replace(`${appRoutes.login}?email=${email}`);
   };
 
   const handleSignUp = (formData: SignUpFormData) => {
     // TODO 회원가입 API 호출 => CHEC-54
     console.log(formData);
-    handleSuccessSignUp();
+    handleSuccessSignUp(formData.email);
   };
 
   const yearOptions = useMemo(() => {

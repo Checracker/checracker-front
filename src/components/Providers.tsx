@@ -3,6 +3,7 @@
 import { store } from "@/provider/store";
 import { Provider } from "react-redux";
 import ThemeRegistry from "./ThemeRegistry";
+import { RecoilRoot } from "recoil";
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +11,9 @@ type Props = {
 export default function Providers({ children }: Props) {
   return (
     <Provider store={store}>
-      <ThemeRegistry>{children}</ThemeRegistry>
+      <RecoilRoot>
+        <ThemeRegistry>{children}</ThemeRegistry>
+      </RecoilRoot>
     </Provider>
   );
 }

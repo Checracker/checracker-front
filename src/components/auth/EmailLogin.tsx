@@ -4,19 +4,16 @@ import classNames from "classnames";
 import styles from "./Login.module.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { signedInUsers } from "@/data/dummy";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LoginFormData } from "@/types/auth";
 import LoginInput from "../ui/LoginInput";
+import useAuth from "@/hooks/useAuth";
+import { appRoutes } from "@/constants/appRoutes";
 
-/**
- * 이메일 로그인
- * - 이메일 주소 입력 -> 시작하기 버튼
- * - 가입된 이메일이 있는 경우 -> 로그인
- * - 가입된 이메일이 없는 경우 -> 회원가입 페이지로 이동 - 논의 필요
- */
 export default function EmailLogin() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
 
   const {
     handleSubmit,
@@ -24,24 +21,29 @@ export default function EmailLogin() {
     formState: { errors },
   } = useForm<LoginFormData>();
   const [showPasswordInput, setShowPasswordInput] = useState<boolean>(false);
-
-  const handleSuccessLogin = () => {
-    // TODO 앱 경로 상수로 만들기 => CHEC-53
-    router.replace("/board");
+  const { login, checkEmail } = useAuth();
+  const handleLogin = (email: string, password: string) => {
+    login(email, password);
   };
 
-  const checkLogin = (formData: LoginFormData) => {
-    // 로그인 아이디 입력
-    const user = signedInUsers.find((user) => user.email === formData.email);
-    if (user) {
-      // 가입된 이메일이 있는 경우
-      setShowPasswordInput(true);
-    } else {
-      // 이메일 형식은 맞지만 가입된 이메일이 없는 경우
-      router.push(`/signup?email=${formData.email}`);
+  const checkLogin = async (formData: LoginFormData) => {
+    try {
+      const res = await checkEmail(formData.email);
+
+      const isSignedIn = res?.data?.isSignedIn;
+
+      if (isSignedIn) {
+        setShowPasswordInput(true);
+      } else {
+        // 이메일 형식은 맞지만 가입된 이메일이 없는 경우
+        router.push(`${appRoutes.signup}?email=${formData.email}`);
+      }
+    } catch (error) {
+      console.error(error);
     }
-    if (formData.password && formData.password === user?.password) {
-      handleSuccessLogin();
+
+    if (formData.password) {
+      handleLogin(formData.email, formData.password);
     }
   };
 
@@ -61,6 +63,7 @@ export default function EmailLogin() {
             message: "형식에 맞지 않는 이메일입니다",
           },
         })}
+        defaultValue={email ?? ""}
         placeholder="이메일주소를 입력해주세요"
         errorMessage={errors.email?.message}
       />
@@ -80,6 +83,7 @@ export default function EmailLogin() {
           })}
           placeholder="비밀번호를 입력해 주세요"
           errorMessage={errors.password?.message}
+          type="password"
         />
       )}
       <button
