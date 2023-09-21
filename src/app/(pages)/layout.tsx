@@ -7,8 +7,8 @@ export default function PagesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const userCooie = cookies().get("user");
-  const user = userCooie?.value;
+  const userCookie = cookies().get("user");
+  const user = userCookie?.value;
 
   if (!user) {
     return redirect(appRoutes.login);
