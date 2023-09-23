@@ -44,8 +44,8 @@ export default function Board({ colors }: Props) {
     const idx = Number(e.target.id);
     const copyList = [...list];
     const [newData] = copyList.splice(idx, 1);
-    newData.checked = checked;
 
+    newData.checked = checked;
     copyList.splice(idx, 0, newData);
     setList(copyList);
   };
