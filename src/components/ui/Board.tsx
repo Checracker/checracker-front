@@ -39,6 +39,17 @@ export default function Board({ colors }: Props) {
   const nextId = useRef<number>(DummyData.length + 1);
   const [list, setList] = useState<dataType>(DummyData);
 
+  const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked, id } = e.target;
+    const idx = Number(e.target.id);
+    const copyList = [...list];
+    const [newData] = copyList.splice(idx, 1);
+    newData.checked = checked;
+
+    copyList.splice(idx, 0, newData);
+    setList(copyList);
+  };
+
   const onClickBtn = () => {
     const dummyAddData = {
       id: nextId.current,
@@ -68,11 +79,24 @@ export default function Board({ colors }: Props) {
         <div>할 일 추가하기</div>
       </AddButton>
       <List>
-        {list.map((todo) => {
+        {list.map((todo, idx) => {
           return (
             <ListItem key={todo.id}>
-              <input type={"checkbox"} checked={todo.checked}></input>
-              {todo.title}
+              <ListItemDetailBox>
+                <input
+                  id={idx.toString()}
+                  type={"checkbox"}
+                  checked={todo.checked}
+                  onChange={onChangeCheckBox}
+                ></input>
+                <div>알람아이콘</div>
+                {todo.checked ? (
+                  <TodoDone>{todo.title}</TodoDone>
+                ) : (
+                  <TodoProgress>{todo.title}</TodoProgress>
+                )}
+              </ListItemDetailBox>
+              <DateBox>목표일 2023 / 07 / 28</DateBox>
             </ListItem>
           );
         })}
@@ -93,6 +117,7 @@ const FlexColBox = styled.div`
 
 const ListItem = styled(FlexRowBox)`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
   height: 48px;
@@ -156,3 +181,24 @@ const ShowDetailButton = styled.div<colorProps>`
   gap: 4px;
   color: ${(props) => props.colors.titleText};
 `;
+
+const DateBox = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #f0e7ff;
+  border-radius: 8px;
+  height: 32px;
+  font-size: 14px;
+  padding: 6px 12px;
+`;
+
+const ListItemDetailBox = styled(FlexRowBox)`
+  justify-content: start;
+`;
+
+const TodoDone = styled.div`
+  color: #b7b7b7;
+  text-decoration: line-through;
+`;
+
+const TodoProgress = styled.div``;
