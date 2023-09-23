@@ -41,7 +41,7 @@ export default function Board({ colors }: Props) {
 
   const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, id } = e.target;
-    const idx = Number(e.target.id);
+    const idx = Number(id);
     const copyList = [...list];
     const [newData] = copyList.splice(idx, 1);
 
