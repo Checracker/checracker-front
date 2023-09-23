@@ -47,9 +47,7 @@ export default function Board({ colors }: Props) {
     };
 
     const currentList = [...list];
-    console.log(currentList);
     currentList.push(dummyAddData);
-    console.log(currentList);
     setList(currentList);
   };
 
