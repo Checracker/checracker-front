@@ -2,7 +2,7 @@
 
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useRef, useState } from "react";
 
 type Props = {
   colors: {
@@ -22,7 +22,37 @@ type colorProps = {
   };
 };
 
+type dataType = itemType[];
+
+type itemType = {
+  id: number;
+  title: string;
+  checked: boolean;
+};
+const DummyData: dataType = [
+  { id: 1, title: "리액트 기초 알아보기", checked: true },
+  { id: 2, title: "리액트 기초 알아보기", checked: false },
+  { id: 3, title: "리액트 기초 알아보기", checked: false },
+];
+
 export default function Board({ colors }: Props) {
+  const nextId = useRef<number>(DummyData.length + 1);
+  const [list, setList] = useState<dataType>(DummyData);
+
+  const onClickBtn = () => {
+    const dummyAddData = {
+      id: nextId.current,
+      title: `더미데이터입니다` + nextId,
+      checked: false,
+    };
+
+    const currentList = [...list];
+    console.log(currentList);
+    currentList.push(dummyAddData);
+    console.log(currentList);
+    setList(currentList);
+  };
+
   return (
     <BoardContainer colors={colors}>
       <BoardHeader>
@@ -35,15 +65,19 @@ export default function Board({ colors }: Props) {
         </ShowDetailButton>
       </BoardHeader>
       <Hr colors={colors}></Hr>
-      <AddButton colors={colors}>
+      <AddButton colors={colors} onClick={onClickBtn}>
         <div>+</div>
         <div>할 일 추가하기</div>
       </AddButton>
       <List>
-        <ListItem>1</ListItem>
-        <ListItem>2</ListItem>
-        <ListItem>3</ListItem>
-        <ListItem>4</ListItem>
+        {list.map((todo) => {
+          return (
+            <ListItem key={todo.id}>
+              <input type={"checkbox"} checked={todo.checked}></input>
+              {todo.title}
+            </ListItem>
+          );
+        })}
       </List>
     </BoardContainer>
   );
