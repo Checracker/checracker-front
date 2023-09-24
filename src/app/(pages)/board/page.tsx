@@ -34,12 +34,16 @@ export default function BoardPage() {
   return (
     <Container>
       <MainHeader>MainTop</MainHeader>
+      <BoardBox>
+
       <MainBody>
         <Board colors={color.board2}></Board>
         <Board colors={color.board1}></Board>
         <Board colors={color.board4}></Board>
         <Board colors={color.board3}></Board>
+
       </MainBody>
+      </BoardBox>
     </Container>
   );
 }
@@ -54,14 +58,22 @@ const FlexColBox = styled.div`
   flex-direction: column;
 `;
 
+const BoardBox = styled.div`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+`
+
 const MainBody = styled.div`
   //todo 임시로 그리드로 한번 작성
-  height: 100%;
+  width:100%;
+  height: calc(100vh - 67px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1%;
   padding: 30px;
 `;
+
 
 const MainHeader = styled(FlexRowBox)``;
 

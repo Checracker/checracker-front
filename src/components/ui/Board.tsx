@@ -120,12 +120,14 @@ const ListItem = styled(FlexRowBox)`
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  height: 48px;
+  min-height: 48px;
   border-radius: 12px;
   padding: 0 8px;
 `;
 
 const List = styled(FlexColBox)`
+
+  overflow-y:scroll;
   gap: 8px;
 `;
 
@@ -137,14 +139,14 @@ const BoardHeader = styled(FlexRowBox)`
 const BoardContainer = styled(FlexColBox)<colorProps>`
   padding: 1rem;
   background-color: ${(props) => props.colors.bgColor};
-  height: 100%;
+  height: calc(100vh/2 - 40px);
   min-width: 530px;
   min-height: 324px;
   border-radius: 8px;
 `;
-
 const AddButton = styled(Button)<colorProps>`
   background-color: ${(props) => props.colors.addBtnColor};
+  min-height:50px;
   color: white;
   border-radius: 12px;
   padding: 0 16px;
