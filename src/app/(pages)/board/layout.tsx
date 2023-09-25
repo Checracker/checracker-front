@@ -1,8 +1,7 @@
-"use client"
+"use client";
 
 import NavBar from "@/components/ui/NavBar";
 import styled from "@emotion/styled";
-
 
 export default function BoardLayout({
   children,
@@ -11,7 +10,8 @@ export default function BoardLayout({
 }) {
   return (
     <Container>
-      <NavBar/>{children}
+      <NavBar />
+      <div className="flex-grow">{children}</div>
     </Container>
   );
 }
