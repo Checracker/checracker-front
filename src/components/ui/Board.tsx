@@ -2,8 +2,9 @@
 
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
+import Image from "next/image";
 import React, { useRef, useState } from "react";
-
+import ArrowRight from "/public/images/ArrowRight.svg";
 type Props = {
   colors: {
     bgColor: string;
@@ -70,12 +71,18 @@ export default function Board({ colors }: Props) {
           <div>중요O 긴급x</div>
         </TitleBox>
         <ShowDetailButton colors={colors}>
-          자세히보기 <div>화살표아이콘</div>
+          자세히보기{" "}
+          <ArrowRight width={24} height={24} color={"red"} fill={"red"} />
         </ShowDetailButton>
       </BoardHeader>
       <Hr colors={colors}></Hr>
       <AddButton colors={colors} onClick={onClickBtn}>
-        <div>+</div>
+        <Image
+          src={"/images/AddFill.svg"}
+          width={24}
+          height={24}
+          alt={"Bell"}
+        />
         <div>할 일 추가하기</div>
       </AddButton>
       <List>
@@ -89,7 +96,12 @@ export default function Board({ colors }: Props) {
                   checked={todo.checked}
                   onChange={onChangeCheckBox}
                 ></input>
-                <div>알람아이콘</div>
+                <Image
+                  src={"/images/Bell.svg"}
+                  width={24}
+                  height={24}
+                  alt={"Bell"}
+                />
                 {todo.checked ? (
                   <TodoDone>{todo.title}</TodoDone>
                 ) : (
@@ -126,8 +138,7 @@ const ListItem = styled(FlexRowBox)`
 `;
 
 const List = styled(FlexColBox)`
-
-  overflow-y:scroll;
+  overflow-y: scroll;
   gap: 8px;
 `;
 
@@ -139,14 +150,14 @@ const BoardHeader = styled(FlexRowBox)`
 const BoardContainer = styled(FlexColBox)<colorProps>`
   padding: 1rem;
   background-color: ${(props) => props.colors.bgColor};
-  height: calc(100vh/2 - 40px);
+  height: calc(100vh / 2 - 40px);
   min-width: 530px;
   min-height: 324px;
   border-radius: 8px;
 `;
 const AddButton = styled(Button)<colorProps>`
   background-color: ${(props) => props.colors.addBtnColor};
-  min-height:50px;
+  min-height: 50px;
   color: white;
   border-radius: 12px;
   padding: 0 16px;
@@ -180,8 +191,13 @@ const TitleBox = styled(FlexRowBox)<colorProps>`
 const ShowDetailButton = styled.div<colorProps>`
   font-weight: 500;
   line-height: 24px;
+  display: flex;
+  flex-direction: row;
   gap: 4px;
   color: ${(props) => props.colors.titleText};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const DateBox = styled.div`
