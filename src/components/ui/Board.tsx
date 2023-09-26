@@ -5,12 +5,16 @@ import { Button } from "@mui/material";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import ArrowRight from "/public/images/ArrowRight.svg";
+import EmptyCircle from "/public/images/EmptyCircle.svg";
+import Cookie from "/public/images/Cookie.svg";
+import Bell from "/public/images/Bell.svg";
 type Props = {
   colors: {
     bgColor: string;
     addBtnColor: string;
     hrColor: string;
     titleText: string;
+    numberBgColor: string;
   };
 };
 
@@ -20,6 +24,7 @@ type colorProps = {
     addBtnColor: string;
     hrColor: string;
     titleText: string;
+    numberBgColor: string;
   };
 };
 
@@ -40,14 +45,22 @@ export default function Board({ colors }: Props) {
   const nextId = useRef<number>(DummyData.length + 1);
   const [list, setList] = useState<dataType>(DummyData);
 
-  const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked, id } = e.target;
+  const onChangeCheckBox = ({
+    isChecked,
+    id,
+  }: {
+    id: number;
+    isChecked: boolean;
+  }) => {
+    console.log(id);
+    console.log(isChecked);
     const idx = Number(id);
     const copyList = [...list];
-    const [newData] = copyList.splice(idx, 1);
+    const [newData] = copyList.splice(idx - 1, 1);
+    newData.checked = isChecked;
+    console.log(newData);
 
-    newData.checked = checked;
-    copyList.splice(idx, 0, newData);
+    copyList.splice(idx - 1, 0, newData);
     setList(copyList);
   };
 
@@ -67,12 +80,17 @@ export default function Board({ colors }: Props) {
     <BoardContainer colors={colors}>
       <BoardHeader>
         <TitleBox colors={colors}>
-          <div>2</div>
+          <NumberBackground colors={colors}>2</NumberBackground>
           <div>중요O 긴급x</div>
         </TitleBox>
         <ShowDetailButton colors={colors}>
           자세히보기{" "}
-          <ArrowRight width={24} height={24} color={"red"} fill={"red"} />
+          <ArrowRight
+            width={24}
+            height={24}
+            color={colors.titleText}
+            fill={colors.titleText}
+          />
         </ShowDetailButton>
       </BoardHeader>
       <Hr colors={colors}></Hr>
@@ -81,7 +99,7 @@ export default function Board({ colors }: Props) {
           src={"/images/AddFill.svg"}
           width={24}
           height={24}
-          alt={"Bell"}
+          alt={"AddFill"}
         />
         <div>할 일 추가하기</div>
       </AddButton>
@@ -90,18 +108,22 @@ export default function Board({ colors }: Props) {
           return (
             <ListItem key={todo.id}>
               <ListItemDetailBox>
-                <input
-                  id={idx.toString()}
-                  type={"checkbox"}
-                  checked={todo.checked}
-                  onChange={onChangeCheckBox}
-                ></input>
-                <Image
-                  src={"/images/Bell.svg"}
-                  width={24}
-                  height={24}
-                  alt={"Bell"}
-                />
+                {todo.checked ? (
+                  <EmptyCircle
+                    width={48}
+                    height={48}
+                    onClick={() =>
+                      onChangeCheckBox({ id: todo.id, isChecked: false })
+                    }
+                  ></EmptyCircle>
+                ) : (
+                  <Cookie
+                    onClick={() =>
+                      onChangeCheckBox({ id: todo.id, isChecked: true })
+                    }
+                  />
+                )}
+                <Bell></Bell>
                 {todo.checked ? (
                   <TodoDone>{todo.title}</TodoDone>
                 ) : (
@@ -145,7 +167,7 @@ const List = styled(FlexColBox)`
 const BoardHeader = styled(FlexRowBox)`
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin: 8px 0px;
 `;
 const BoardContainer = styled(FlexColBox)<colorProps>`
   padding: 1rem;
@@ -188,9 +210,21 @@ const TitleBox = styled(FlexRowBox)<colorProps>`
   color: ${(props) => props.colors.titleText};
 `;
 
+const NumberBackground = styled.div<colorProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background-color: ${(props) => props.colors.numberBgColor};
+  width: 36px;
+  height: 36px;
+  font-weight: 400;
+`;
+
 const ShowDetailButton = styled.div<colorProps>`
   font-weight: 500;
   line-height: 24px;
+  font-size: 16px;
   display: flex;
   flex-direction: row;
   gap: 4px;
@@ -211,12 +245,16 @@ const DateBox = styled.div`
 `;
 
 const ListItemDetailBox = styled(FlexRowBox)`
+  align-items: center;
   justify-content: start;
 `;
 
 const TodoDone = styled.div`
   color: #b7b7b7;
+  margin: 0px 6px;
   text-decoration: line-through;
 `;
 
-const TodoProgress = styled.div``;
+const TodoProgress = styled.div`
+  margin: 0px 6px;
+`;
