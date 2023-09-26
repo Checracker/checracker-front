@@ -8,11 +8,13 @@ import {
   login as loginAction,
   logout as logoutAction,
 } from "@/state/redux/loginSlice";
+import useToast from "./useToast";
 
 export default function useAuth() {
   const isLogin = useAppSelector((state) => state.login.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { toast } = useToast();
 
   const login = useCallback(
     async (email: string, password: string) => {
@@ -22,13 +24,11 @@ export default function useAuth() {
         router.replace(appRoutes.home);
         return res;
       } catch (error) {
-        // TODO 토스트 메시지로 변경
-        console.error(error);
-        alert("로그인 실패");
+        toast("로그인 실패", "error");
         dispatch(logoutAction);
       }
     },
-    [router, dispatch],
+    [router, dispatch, toast],
   );
 
   const logout = useCallback(async () => {
@@ -41,25 +41,24 @@ export default function useAuth() {
       router.replace(appRoutes.login);
       return res;
     } catch (error) {
-      // TODO 토스트 메시지로 변경
-      console.error(error);
-      alert("로그아웃 실패");
+      toast("로그아웃 실패", "error");
     }
-  }, [router, dispatch]);
+  }, [router, dispatch, toast]);
 
-  const checkEmail = useCallback(async (email: string) => {
-    try {
-      const res = await http.post<{ isSignedIn: boolean }>(
-        apiRoutes.auth.checkEmail,
-        { email },
-      );
-      return res;
-    } catch (error) {
-      // TODO 토스트 메시지로 변경
-      console.error(error);
-      alert("이메일 중복 확인 실패");
-    }
-  }, []);
+  const checkEmail = useCallback(
+    async (email: string) => {
+      try {
+        const res = await http.post<{ isSignedIn: boolean }>(
+          apiRoutes.auth.checkEmail,
+          { email },
+        );
+        return res;
+      } catch (error) {
+        toast("이메일 중복 확인 실패", "error");
+      }
+    },
+    [toast],
+  );
 
   return {
     isLogin,
