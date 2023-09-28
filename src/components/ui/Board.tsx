@@ -52,13 +52,10 @@ export default function Board({ colors }: Props) {
     id: number;
     isChecked: boolean;
   }) => {
-    console.log(id);
-    console.log(isChecked);
     const idx = Number(id);
     const copyList = [...list];
     const [newData] = copyList.splice(idx - 1, 1);
     newData.checked = isChecked;
-    console.log(newData);
 
     copyList.splice(idx - 1, 0, newData);
     setList(copyList);
