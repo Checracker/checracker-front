@@ -38,7 +38,7 @@ export type SimpleSelectProps = {
   options: Option[];
   className?: string;
 };
-export default function SimpleSelect({
+export default function SimpleFormSelect({
   options,
   label,
   register,

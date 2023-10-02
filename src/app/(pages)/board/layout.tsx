@@ -8,6 +8,7 @@ export default function BoardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // TODO: 만약 내가 만든 board가 아니라면 404 페이지보여주기
   return (
     <Container>
       <NavBar />
