@@ -4,5 +4,5 @@ export const appRoutes = {
   signup: "/signup",
   board: "/board",
   quadrant: (boardId: number, quadrantId: number) =>
-    `/board/${boardId}/quadrant${quadrantId}`,
+    `/board/${boardId}/quadrant/${quadrantId}`,
 };
