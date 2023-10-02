@@ -5,6 +5,7 @@ import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useCallback, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useForm } from "react-hook-form";
+import { SIMPLE_FORM_SELECT } from "@/constants/ids";
 
 export type Option = {
   value: string | number;
@@ -31,7 +32,7 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-export type SimpleSelectProps = {
+export type SimpleFormSelectProps = {
   id?: string;
   label: string;
   register: ReturnType<ReturnType<typeof useForm>["register"]>;
@@ -42,9 +43,9 @@ export default function SimpleFormSelect({
   options,
   label,
   register,
-  id = "simple-select",
+  id = SIMPLE_FORM_SELECT,
   className,
-}: SimpleSelectProps) {
+}: SimpleFormSelectProps) {
   const { onChange, ...restRegister } = register;
   const [value, setValue] = useState<Option["value"]>("");
   const handleChange = useCallback(
