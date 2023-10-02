@@ -7,8 +7,7 @@ import { redirect, useParams } from "next/navigation";
 import CloseRound from "@/components/ui/icons/CloseRound";
 
 export default function QuadrantPage() {
-  const { boardId, quadrantId } = useParams();
-  console.log(boardId, quadrantId);
+  const { quadrantId } = useParams();
 
   if (!(quadrantId >= "1" && quadrantId <= "4")) {
     redirect(`${appRoutes.board}`);

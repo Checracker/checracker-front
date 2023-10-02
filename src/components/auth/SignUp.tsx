@@ -41,8 +41,6 @@ export default function SignUp() {
   };
 
   const handleSignUp = (formData: SignUpFormData) => {
-    // TODO 회원가입 API 호출 => CHEC-54
-    console.log(formData);
     handleSuccessSignUp(formData.email);
   };
 
