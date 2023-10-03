@@ -8,42 +8,26 @@ import ArrowRight from "/public/images/ArrowRight.svg";
 import EmptyCircle from "/public/images/EmptyCircle.svg";
 import Cookie from "/public/images/Cookie.svg";
 import Bell from "/public/images/Bell.svg";
-type Props = {
-  colors: {
-    bgColor: string;
-    addBtnColor: string;
-    hrColor: string;
-    titleText: string;
-    numberBgColor: string;
-  };
+import { BoardColor } from "@/app/(pages)/board/page";
+
+type ColorProps = {
+  colors: BoardColor;
 };
 
-type colorProps = {
-  colors: {
-    bgColor: string;
-    addBtnColor: string;
-    hrColor: string;
-    titleText: string;
-    numberBgColor: string;
-  };
-};
-
-type dataType = itemType[];
-
-type itemType = {
+type Item = {
   id: number;
   title: string;
   checked: boolean;
 };
-const DummyData: dataType = [
+const DummyData: Item[] = [
   { id: 1, title: "리액트 기초 알아보기", checked: true },
   { id: 2, title: "리액트 기초 알아보기", checked: false },
   { id: 3, title: "리액트 기초 알아보기", checked: false },
 ];
 
-export default function Board({ colors }: Props) {
+export default function Board({ colors }: ColorProps) {
   const nextId = useRef<number>(DummyData.length + 1);
-  const [list, setList] = useState<dataType>(DummyData);
+  const [todoList, setTodoList] = useState<Item[]>(DummyData);
 
   const onChangeCheckBox = ({
     isChecked,
@@ -53,12 +37,12 @@ export default function Board({ colors }: Props) {
     isChecked: boolean;
   }) => {
     const idx = Number(id);
-    const copyList = [...list];
-    const [newData] = copyList.splice(idx - 1, 1);
+    const copyTodoList = [...todoList];
+    const [newData] = copyTodoList.splice(idx - 1, 1);
     newData.checked = isChecked;
 
-    copyList.splice(idx - 1, 0, newData);
-    setList(copyList);
+    copyTodoList.splice(idx - 1, 0, newData);
+    setTodoList(copyTodoList);
   };
 
   const onClickBtn = () => {
@@ -68,9 +52,9 @@ export default function Board({ colors }: Props) {
       checked: false,
     };
 
-    const currentList = [...list];
-    currentList.push(dummyAddData);
-    setList(currentList);
+    const currentTodoList = [...todoList];
+    currentTodoList.push(dummyAddData);
+    setTodoList(currentTodoList);
   };
 
   return (
@@ -100,11 +84,11 @@ export default function Board({ colors }: Props) {
         />
         <div>할 일 추가하기</div>
       </AddButton>
-      <List>
-        {list.map((todo, idx) => {
+      <TodoList>
+        {todoList.map((todo, idx) => {
           return (
-            <ListItem key={todo.id}>
-              <ListItemDetailBox>
+            <ToDoItem key={todo.id}>
+              <TodoItemDetailBox>
                 {todo.checked ? (
                   <EmptyCircle
                     width={48}
@@ -126,12 +110,12 @@ export default function Board({ colors }: Props) {
                 ) : (
                   <TodoProgress>{todo.title}</TodoProgress>
                 )}
-              </ListItemDetailBox>
+              </TodoItemDetailBox>
               <DateBox>목표일 2023 / 07 / 28</DateBox>
-            </ListItem>
+            </ToDoItem>
           );
         })}
-      </List>
+      </TodoList>
     </BoardContainer>
   );
 }
@@ -146,7 +130,7 @@ const FlexColBox = styled.div`
   flex-direction: column;
 `;
 
-const ListItem = styled(FlexRowBox)`
+const ToDoItem = styled(FlexRowBox)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -156,7 +140,7 @@ const ListItem = styled(FlexRowBox)`
   padding: 0 8px;
 `;
 
-const List = styled(FlexColBox)`
+const TodoList = styled(FlexColBox)`
   overflow-y: scroll;
   gap: 8px;
 `;
@@ -166,7 +150,7 @@ const BoardHeader = styled(FlexRowBox)`
   align-items: center;
   margin: 8px 0px;
 `;
-const BoardContainer = styled(FlexColBox)<colorProps>`
+const BoardContainer = styled(FlexColBox)<ColorProps>`
   padding: 1rem;
   background-color: ${(props) => props.colors.bgColor};
   height: calc(100vh / 2 - 40px);
@@ -174,7 +158,7 @@ const BoardContainer = styled(FlexColBox)<colorProps>`
   min-height: 324px;
   border-radius: 8px;
 `;
-const AddButton = styled(Button)<colorProps>`
+const AddButton = styled(Button)<ColorProps>`
   background-color: ${(props) => props.colors.addBtnColor};
   min-height: 50px;
   color: white;
@@ -194,11 +178,11 @@ const AddButton = styled(Button)<colorProps>`
   }
 `;
 
-const Hr = styled.hr<colorProps>`
+const Hr = styled.hr<ColorProps>`
   border: 2px solid;
   border-color: ${(props) => props.colors.hrColor};
 `;
-const TitleBox = styled(FlexRowBox)<colorProps>`
+const TitleBox = styled(FlexRowBox)<ColorProps>`
   padding: 4px 8px;
   gap: 8px;
   font-weight: 600;
@@ -207,7 +191,7 @@ const TitleBox = styled(FlexRowBox)<colorProps>`
   color: ${(props) => props.colors.titleText};
 `;
 
-const NumberBackground = styled.div<colorProps>`
+const NumberBackground = styled.div<ColorProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,7 +202,7 @@ const NumberBackground = styled.div<colorProps>`
   font-weight: 400;
 `;
 
-const ShowDetailButton = styled.div<colorProps>`
+const ShowDetailButton = styled.div<ColorProps>`
   font-weight: 500;
   line-height: 24px;
   font-size: 16px;
@@ -241,7 +225,7 @@ const DateBox = styled.div`
   padding: 6px 12px;
 `;
 
-const ListItemDetailBox = styled(FlexRowBox)`
+const TodoItemDetailBox = styled(FlexRowBox)`
   align-items: center;
   justify-content: start;
 `;

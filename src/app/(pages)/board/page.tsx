@@ -3,8 +3,23 @@
 import Board from "@/components/ui/Board";
 import styled from "@emotion/styled";
 
+export type BoardColor = {
+  bgColor: string;
+  addBtnColor: string;
+  hrColor: string;
+  titleText: string;
+  numberBgColor: string;
+};
+
+type BoardTheme = {
+  board1: BoardColor;
+  board2: BoardColor;
+  board3: BoardColor;
+  board4: BoardColor;
+};
+
 export default function BoardPage() {
-  const color = {
+  const color: BoardTheme = {
     board1: {
       bgColor: "#FFEFEFE5",
       addBtnColor: "#E56363",
@@ -67,7 +82,7 @@ const BoardBox = styled.div`
 `;
 
 const MainBody = styled.div`
-  //todo 임시로 그리드로 한번 작성
+  //TODO 임시로 그리드로 한번 작성해 보았다. 추후 최적의 수정 필요
   width: 100%;
   height: calc(100vh - 67px);
   display: grid;
