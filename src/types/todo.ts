@@ -21,9 +21,9 @@ export interface Todo {
   id: number;
   title: string;
   status: TodoStatus;
-  startDate: string; // YYYY-MM-DD
-  targetDate: string;
-  endDate: string;
+  startDate?: string; // YYYY-MM-DD
+  targetDate?: string;
+  endDate?: string;
   contents: string;
   isAlarmed: boolean;
   childTodo?: Todo[];
