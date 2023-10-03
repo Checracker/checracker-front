@@ -38,11 +38,13 @@ export default function Board({ colors }: ColorProps) {
   }) => {
     const idx = Number(id);
     const copyTodoList = [...todoList];
-    const [newData] = copyTodoList.splice(idx - 1, 1);
-    newData.checked = isChecked;
 
-    copyTodoList.splice(idx - 1, 0, newData);
-    setTodoList(copyTodoList);
+    const newTodoList = copyTodoList.map((todo, i) => {
+      if (i === idx - 1) todo.checked = isChecked;
+      return todo;
+    });
+
+    setTodoList(newTodoList);
   };
 
   const onClickBtn = () => {
@@ -52,9 +54,7 @@ export default function Board({ colors }: ColorProps) {
       checked: false,
     };
 
-    const currentTodoList = [...todoList];
-    currentTodoList.push(dummyAddData);
-    setTodoList(currentTodoList);
+    setTodoList((prev) => [...prev, dummyAddData]);
   };
 
   return (
@@ -90,19 +90,19 @@ export default function Board({ colors }: ColorProps) {
             <ToDoItem key={todo.id}>
               <TodoItemDetailBox>
                 {todo.checked ? (
+                  <Cookie
+                    onClick={() =>
+                      onChangeCheckBox({ id: todo.id, isChecked: false })
+                    }
+                  />
+                ) : (
                   <EmptyCircle
                     width={48}
                     height={48}
                     onClick={() =>
-                      onChangeCheckBox({ id: todo.id, isChecked: false })
-                    }
-                  ></EmptyCircle>
-                ) : (
-                  <Cookie
-                    onClick={() =>
                       onChangeCheckBox({ id: todo.id, isChecked: true })
                     }
-                  />
+                  ></EmptyCircle>
                 )}
                 <Bell></Bell>
                 {todo.checked ? (
