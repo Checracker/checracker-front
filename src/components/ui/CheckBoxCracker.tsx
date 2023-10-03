@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -12,19 +13,27 @@ export default function CheckBoxCracker({ checked, onChange }: Props) {
   useEffect(() => {
     setIsChecked(checked);
   }, [checked]);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(e.target.checked);
-    onChange(e.target.checked);
+  const handleClick = () => {
+    setIsChecked((prev) => !prev);
+    onChange(!isChecked);
   };
   return (
-    <div className="inline-block">
-      <input
-        type="checkbox"
-        name=""
-        id=""
-        onChange={handleChange}
-        checked={isChecked}
-      />
+    <div className="inline-block cursor-pointer" onClick={handleClick}>
+      {isChecked ? (
+        <Image
+          src={"/images/BitedCracker.svg"}
+          width={22}
+          height={22}
+          alt="checked"
+        />
+      ) : (
+        <Image
+          src={"/images/Container.svg"}
+          width={22}
+          height={22}
+          alt="unchecked"
+        />
+      )}
     </div>
   );
 }

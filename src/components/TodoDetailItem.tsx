@@ -44,7 +44,7 @@ export default function TodoDetailItem({ todo }: Props) {
             <NotificationsOffOutlinedIcon />
           )}
 
-          <Title>{todo.title}</Title>
+          <Title done={status === "DONE"}>{todo.title}</Title>
           <StatusLabel status={status} />
         </div>
       </div>
@@ -69,10 +69,11 @@ export default function TodoDetailItem({ todo }: Props) {
   );
 }
 
-const Title = styled.h3`
-  color: #1d1a1a;
+const Title = styled.h3<{ done: boolean }>`
+  color: ${({ done }) => (done ? "#B7B7B7" : "#1d1a1a")};
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
+  text-decoration-line: ${({ done }) => (done ? "line-through" : "none")};
 `;
