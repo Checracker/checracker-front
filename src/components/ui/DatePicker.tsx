@@ -2,20 +2,31 @@
 
 import styled from "@emotion/styled";
 import classNames from "classnames";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import dayjs from "dayjs";
 
 type Props = {
   className?: string;
-  date?: Date;
+  date?: string;
+  onChange?: (date?: string) => void;
+  maxDate?: string;
 };
-export default function DatePicker({ className, date: initialDate }: Props) {
+export default function DatePicker({
+  className,
+  date: initialDate,
+  onChange,
+  maxDate,
+}: Props) {
   const handleClickLabel = () => {};
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-    initialDate,
+    initialDate ? new Date(initialDate) : undefined,
   );
+  useEffect(() => {
+    setSelectedDate(initialDate ? new Date(initialDate) : undefined);
+  }, [initialDate]);
   const handleChangeDatePicker = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedDate(new Date(event.target.value));
+    onChange?.(event.target.value);
   };
   return (
     <DatePickerWrapper
@@ -29,9 +40,9 @@ export default function DatePicker({ className, date: initialDate }: Props) {
         className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
         type="date"
         onChange={handleChangeDatePicker}
+        max={maxDate}
       />
       <DateText onClick={handleClickLabel} className="text-center">
-        {/* YYYY / MM / DD */}
         {selectedDate ? dayjs(selectedDate).format("YYYY / MM / DD") : "-"}
       </DateText>
     </DatePickerWrapper>
