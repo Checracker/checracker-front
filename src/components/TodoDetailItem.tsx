@@ -37,7 +37,7 @@ export default function TodoDetailItem({ todo }: Props) {
         <div className="flex gap-3 px-[9px] items-center">
           {todo.isAlarmed ? (
             <Image
-              src="/images/Bell.svg"
+              src="/images/bell-icon.svg"
               width={24}
               height={24}
               alt="alarm on"
