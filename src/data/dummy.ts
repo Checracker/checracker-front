@@ -1,3 +1,4 @@
+import { TODO_STATUS } from "@/constants/todo";
 import { Todo } from "@/types/todo";
 
 export type User = {
@@ -46,7 +47,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 1,
     title: "CI/CD 구축하기",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "2023-11-15",
     targetDate: "2023-12-31",
     contents: "AWS EC2 배포 자동화하기",
@@ -55,7 +56,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 2,
     title: "체크래커 프로젝트 MVP 완성하기",
-    status: "IN_PROGRESS",
+    status: TODO_STATUS.IN_PROGRESS,
     startDate: "2023-09-01",
     targetDate: "2023-12-31",
     endDate: "",
@@ -65,7 +66,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 3,
     title: "토스트 메시지 추가",
-    status: "DONE",
+    status: TODO_STATUS.DONE,
     startDate: "2023-09-30",
     targetDate: "2023-09-30",
     endDate: "2023-09-30",
@@ -75,7 +76,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 4,
     title: "투두 타입 추가",
-    status: "DONE",
+    status: TODO_STATUS.DONE,
     startDate: "2023-09-23",
     targetDate: "2023-09-24",
     endDate: "2023-09-24",
@@ -85,7 +86,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 5,
     title: "다국어",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -95,7 +96,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 6,
     title: "구글 로그인",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -105,7 +106,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 7,
     title: "다크모드",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -115,7 +116,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 8,
     title: "설정 페이지",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -125,7 +126,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 9,
     title: "마이 페이지",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -135,7 +136,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 10,
     title: "보드 관리",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -145,7 +146,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 11,
     title: "단위 테스트 적용",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -155,7 +156,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 12,
     title: "스토리북",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -165,7 +166,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 13,
     title: "리프레시 토큰",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -175,7 +176,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 14,
     title: "모니터링 시스템 구축하기",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -185,7 +186,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 15,
     title: "GA 적용하기",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -195,7 +196,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 16,
     title: "앱 패키징하기",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -205,7 +206,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 17,
     title: "안드로이드 배포",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -215,7 +216,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 18,
     title: "애플 로그인",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -225,7 +226,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 19,
     title: "코드 푸시 적용",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",
@@ -235,7 +236,7 @@ export const dummyTodos: Todo[] = [
   {
     id: 20,
     title: "앱스토어 배포",
-    status: "TO_DO",
+    status: TODO_STATUS.TO_DO,
     startDate: "",
     targetDate: "",
     endDate: "",

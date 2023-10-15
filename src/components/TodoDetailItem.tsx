@@ -7,6 +7,7 @@ import NotificationsOffOutlinedIcon from "@mui/icons-material/NotificationsOffOu
 import CheckBoxCracker from "./ui/CheckBoxCracker";
 import { useState } from "react";
 import dayjs from "dayjs";
+import { TODO_STATUS } from "@/constants/todo";
 
 type Props = {
   todo: Todo;
@@ -17,7 +18,7 @@ export default function TodoDetailItem({ todo }: Props) {
   const handleClickCheckBox = (checked: boolean) => {
     if (checked) {
       setEndDate(dayjs().format("YYYY-MM-DD"));
-      setStatus("DONE");
+      setStatus(TODO_STATUS.DONE);
     } else {
       setEndDate(undefined);
       setStatus(todo.status);
@@ -44,7 +45,7 @@ export default function TodoDetailItem({ todo }: Props) {
             <NotificationsOffOutlinedIcon />
           )}
 
-          <Title done={status === "DONE"}>{todo.title}</Title>
+          <Title done={status === TODO_STATUS.DONE}>{todo.title}</Title>
           <StatusLabel status={status} />
         </div>
       </div>
