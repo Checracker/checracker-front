@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LoginFormData } from "@/types/auth";
 import LoginInput from "../ui/LoginInput";
-import SimpleSelect from "../ui/SimpleSelect";
+import SimpleFormSelect from "../ui/SimpleFormSelect";
 import { useMemo, useState } from "react";
 import ErrorText from "../ui/ErrorText";
 import { SelectChangeEvent } from "@mui/material";
@@ -41,8 +41,6 @@ export default function SignUp() {
   };
 
   const handleSignUp = (formData: SignUpFormData) => {
-    // TODO 회원가입 API 호출 => CHEC-54
-    console.log(formData);
     handleSuccessSignUp(formData.email);
   };
 
@@ -143,7 +141,7 @@ export default function SignUp() {
       />
       <div>
         <div className="flex gap-[10px]">
-          <SimpleSelect
+          <SimpleFormSelect
             register={register("year", {
               required: "생년월일을 입력해주세요",
             })}
@@ -152,7 +150,7 @@ export default function SignUp() {
             label="년도"
             id="year"
           />
-          <SimpleSelect
+          <SimpleFormSelect
             register={register("month", {
               required: "생년월일을 입력해주세요",
               onChange: (event: SelectChangeEvent) => {
@@ -164,7 +162,7 @@ export default function SignUp() {
             label="월"
             id="month"
           />
-          <SimpleSelect
+          <SimpleFormSelect
             register={register("day", {
               required: "생년월일을 입력해주세요",
             })}

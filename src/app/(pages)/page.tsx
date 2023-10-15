@@ -17,6 +17,11 @@ export default function Home() {
           logout
         </Button>
       </span>
+      <div>
+        <Link href={appRoutes.quadrant(12, 1)}>
+          <Button variant="contained">go to quadrant page</Button>
+        </Link>
+      </div>
     </div>
   );
 }

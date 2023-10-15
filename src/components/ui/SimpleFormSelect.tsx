@@ -4,7 +4,8 @@ import styled from "@emotion/styled";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useCallback, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { SIMPLE_SELECT } from "@/constants/ids";
+import { useForm } from "react-hook-form";
+import { SIMPLE_FORM_SELECT } from "@/constants/ids";
 
 export type Option = {
   value: string | number;
@@ -21,39 +22,37 @@ const StyledSelect = styled(Select)`
   }
 
   fieldset {
-    border: 1px solid #e4e4e4 !important;
+    border: 1px solid #e4e4e4;
   }
 
   svg {
     position: absolute;
     right: 16px;
-    color: white;
-    pointer-events: none;
+    z-index: -1;
   }
 `;
 
-export type SimpleSelectProps = {
+export type SimpleFormSelectProps = {
   id?: string;
   label: string;
+  register: ReturnType<ReturnType<typeof useForm>["register"]>;
   options: Option[];
-  onChange: (value: string) => void;
   className?: string;
-  defaultValue?: string;
 };
-export default function SimpleSelect({
-  id = SIMPLE_SELECT,
-  label,
+export default function SimpleFormSelect({
   options,
-  onChange,
+  label,
+  register,
+  id = SIMPLE_FORM_SELECT,
   className,
-  defaultValue,
-}: SimpleSelectProps) {
-  const [value, setValue] = useState<Option["value"]>(defaultValue ?? "");
+}: SimpleFormSelectProps) {
+  const { onChange, ...restRegister } = register;
+  const [value, setValue] = useState<Option["value"]>("");
   const handleChange = useCallback(
     (_event: SelectChangeEvent<unknown>) => {
       const event = _event as SelectChangeEvent<Option["value"]>;
       setValue(event.target.value);
-      onChange(event.target.value.toString());
+      onChange(event);
     },
     [onChange],
   );
@@ -72,9 +71,10 @@ export default function SimpleSelect({
           if (selected === "") {
             return <span className="text-[#B4AEAE]">{label}</span>;
           }
-          return <span className="text-white">{selected}</span>;
+          return selected;
         }}
         placeholder={label}
+        {...restRegister}
       >
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>
