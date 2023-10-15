@@ -24,5 +24,6 @@ export default function Providers({ children }: Props) {
         </ThemeRegistry>
       </ThemeProvider>
     </Provider>
+    
   );
 }

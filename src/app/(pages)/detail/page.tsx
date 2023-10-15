@@ -22,9 +22,6 @@ export default function DetailBoard() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const tempBoardNumber = 3;
-  const label = {
-    inputProps: { "aria-label": `${tempBoardNumber}사분면목표 A` },
-  };
 
   return (
     <div>
