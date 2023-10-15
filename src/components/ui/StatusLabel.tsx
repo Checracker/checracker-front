@@ -1,4 +1,4 @@
-import { TODO_STATUS } from "@/constants/todo";
+import { TODO_STATUS, TODO_STATUS_LABEL } from "@/constants/todo";
 import { TodoStatus } from "@/types/todo";
 
 type Props = {
@@ -8,11 +8,11 @@ export default function StatusLabel({ status }: Props) {
   const getStatusText = (status: TodoStatus) => {
     switch (status) {
       case TODO_STATUS.TO_DO:
-        return "이슈사항";
+        return TODO_STATUS_LABEL.TO_DO;
       case TODO_STATUS.IN_PROGRESS:
-        return "진행중";
+        return TODO_STATUS_LABEL.IN_PROGRESS;
       default:
-        return "";
+        return TODO_STATUS_LABEL.DONE;
     }
   };
   if (status === TODO_STATUS.DONE) {
