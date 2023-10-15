@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import classNames from "classnames";
 import { ChangeEvent, useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { DATE_FORMAT_SLASH } from "@/constants/date";
 
 type Props = {
   className?: string;
@@ -43,7 +44,7 @@ export default function DatePicker({
         max={maxDate}
       />
       <DateText onClick={handleClickLabel} className="text-center">
-        {selectedDate ? dayjs(selectedDate).format("YYYY / MM / DD") : "-"}
+        {selectedDate ? dayjs(selectedDate).format(DATE_FORMAT_SLASH) : "-"}
       </DateText>
     </DatePickerWrapper>
   );

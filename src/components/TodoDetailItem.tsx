@@ -8,6 +8,7 @@ import CheckBoxCracker from "./ui/CheckBoxCracker";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { TODO_STATUS } from "@/constants/todo";
+import { ISO_8601_FORMAT } from "@/constants/date";
 
 type Props = {
   todo: Todo;
@@ -17,7 +18,7 @@ export default function TodoDetailItem({ todo }: Props) {
   const [status, setStatus] = useState<TodoStatus>(todo.status);
   const handleClickCheckBox = (checked: boolean) => {
     if (checked) {
-      setEndDate(dayjs().format("YYYY-MM-DD"));
+      setEndDate(dayjs().format(ISO_8601_FORMAT));
       setStatus(TODO_STATUS.DONE);
     } else {
       setEndDate(undefined);
@@ -56,7 +57,7 @@ export default function TodoDetailItem({ todo }: Props) {
           className="bg-[#E7F2FF]"
           date={endDate}
           onChange={handleChangeEndDate}
-          maxDate={dayjs().format("YYYY-MM-DD")}
+          maxDate={dayjs().format(ISO_8601_FORMAT)}
         />
         <Image
           className="inline-block cursor-pointer"
